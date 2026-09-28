@@ -10,9 +10,8 @@ export async function GET(req) {
 			},
 		});
 
-		if (!response.ok) {
+		if (!response.ok)
 			throw new Error(`OpenRouter API error: ${response.status}`);
-		}
 
 		const data = await response.json();
 
