@@ -15,7 +15,7 @@ import {
 import UserButton from "@/modules/authentication/components/user-button";
 import { cn } from "@/lib/utils";
 import { PlusIcon, SearchIcon, EllipsisIcon, Trash } from "lucide-react";
-import { useChatStore } from "@/modules/store/chat-store";
+import { useChatStore } from "../store/chat-store";
 import DeleteChatModal from "./modal/chat-delete-modal";
 
 const ChatSidebar = ({ user, chats }) => {
