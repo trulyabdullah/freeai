@@ -15,7 +15,7 @@ import {
 import UserButton from "@/modules/authentication/components/user-button";
 import { cn } from "@/lib/utils";
 import { PlusIcon, SearchIcon, EllipsisIcon, Trash } from "lucide-react";
-import { useChatStore } from "../store/chat-store";
+import { useChatStore } from "@/modules/store/chat-store";
 import DeleteChatModal from "./modal/chat-delete-modal";
 
 const ChatSidebar = ({ user, chats }) => {
@@ -100,7 +100,7 @@ const ChatSidebar = ({ user, chats }) => {
 						chat.id === activeChatId && "bg-sidebar-accent",
 					)}
 				>
-					<div className="flex felx-row justify-between items-center gap-2">
+					<div className="flex flex-row justify-between items-center gap-2">
 						<span className="truncate flex-1">{chat.title}</span>
 						<DropdownMenu>
 							<DropdownMenuTrigger asChild>
