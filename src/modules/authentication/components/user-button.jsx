@@ -86,30 +86,26 @@ export default function UserButton({
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<Button
-					variant="ghost"
-					className={`relative ${avatarSizes[size]} rounded-full p-0 hover:bg-accent`}
-					disabled={isLoading}
-				>
-					<Avatar className={avatarSizes[size]}>
-						<AvatarImage
-							src={user.image || ""}
-							alt={user.name || "User avatar"}
-						/>
-						<AvatarFallback className="bg-primary text-primary-foreground font-medium">
-							{getUserInitials(user.name, user.email)}
-						</AvatarFallback>
-					</Avatar>
-					{showBadge && (
-						<Badge
-							variant={badgeVariant}
-							className="absolute -bottom-1 -right-1 h-5 px-1 text-xs"
-						>
-							{badgeText}
-						</Badge>
-					)}
-				</Button>
+			<DropdownMenuTrigger
+				render={<Button variant="ghost" className="relative h-..." />}
+			>
+				<Avatar className={avatarSizes[size]}>
+					<AvatarImage
+						src={user.image || ""}
+						alt={user.name || "User avatar"}
+					/>
+					<AvatarFallback className="bg-primary text-primary-foreground font-medium">
+						{getUserInitials(user.name, user.email)}
+					</AvatarFallback>
+				</Avatar>
+				{showBadge && (
+					<Badge
+						variant={badgeVariant}
+						className="absolute -bottom-1 -right-1 h-5 px-1 text-xs"
+					>
+						{badgeText}
+					</Badge>
+				)}
 			</DropdownMenuTrigger>
 
 			<DropdownMenuContent className="w-64" align="end" forceMount>
