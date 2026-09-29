@@ -11,6 +11,7 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
+	DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu";
 import UserButton from "@/modules/authentication/components/user-button";
 import { cn } from "@/lib/utils";
@@ -114,15 +115,21 @@ const ChatSidebar = ({ user, chats }) => {
 								</Button>
 							</DropdownMenuTrigger>
 							<DropdownMenuContent align="end">
-								<DropdownMenuLabel>Actions</DropdownMenuLabel>
-								<DropdownMenuSeparator />
-								<DropdownMenuItem
-									className="flex flex-row gap-2 cursor-pointer"
-									onClick={(e) => onDelete(e, chat.id)}
-								>
-									<Trash className="h-4 w-4 text-red-500" />
-									<span className="text-red-500">Delete</span>
-								</DropdownMenuItem>
+								<DropdownMenuGroup>
+									<DropdownMenuLabel>
+										Actions
+									</DropdownMenuLabel>
+									<DropdownMenuSeparator />
+									<DropdownMenuItem
+										className="flex flex-row gap-2 cursor-pointer"
+										onClick={(e) => onDelete(e, chat.id)}
+									>
+										<Trash className="h-4 w-4 text-red-500" />
+										<span className="text-red-500">
+											Delete
+										</span>
+									</DropdownMenuItem>
+								</DropdownMenuGroup>
 							</DropdownMenuContent>
 						</DropdownMenu>
 					</div>
