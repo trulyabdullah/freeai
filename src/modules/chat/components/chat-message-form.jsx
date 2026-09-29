@@ -12,9 +12,12 @@ import { toast } from "sonner";
 
 const ChatMessageForm = ({ initialMessage, onMessageChange }) => {
 	const { data: models, isPending } = useAIModels();
-	const [selectedModel, setSelectedModel] = useState(models?.models[0]?.id);
+	const [selectedModel, setSelectedModel] = useState(null);
 	const [message, setMessage] = useState("");
 	const { mutateAsync, isPending: isChatPending } = useCreateChat();
+
+	const modelList = models?.models ?? [];
+	const effectiveModel = selectedModel ?? modelList[0]?.id;
 
 	useEffect(() => {
 		if (initialMessage) {
@@ -24,15 +27,16 @@ const ChatMessageForm = ({ initialMessage, onMessageChange }) => {
 	}, [initialMessage, onMessageChange]);
 
 	const handleSubmit = async (e) => {
+		e.preventDefault();
+		if (!message.trim() || !effectiveModel || isChatPending) return;
+
 		try {
-			e.preventDefault();
-			await mutateAsync({ content: message, model: selectedModel });
+			await mutateAsync({ content: message, model: effectiveModel });
+			setMessage("");
 			toast.success("Message sent successfully");
 		} catch (error) {
 			console.error("Error sending message:", error);
 			toast.error("Failed to send message");
-		} finally {
-			setMessage("");
 		}
 	};
 
@@ -65,8 +69,8 @@ const ChatMessageForm = ({ initialMessage, onMessageChange }) => {
 							) : (
 								<>
 									<ModelSelector
-										models={models?.models}
-										selectedModelId={selectedModel}
+										models={modelList}
+										selectedModelId={effectiveModel}
 										onModelSelect={setSelectedModel}
 										className="ml-1"
 									/>
