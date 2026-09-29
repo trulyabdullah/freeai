@@ -71,7 +71,7 @@ export async function POST(req) {
 		let modelMessages;
 
 		try {
-			modelMessages = convertToModelMessages(allUIMessages);
+			modelMessages = await convertToModelMessages(allUIMessages);
 		} catch (conversionError) {
 			modelMessages = allUIMessages
 				.map((msg) => ({
@@ -83,6 +83,13 @@ export async function POST(req) {
 				}))
 				.filter((m) => m.content);
 		}
+
+		console.log(
+			"modelMessages:",
+			Array.isArray(modelMessages),
+			JSON.stringify(modelMessages)?.slice(0, 500),
+		);
+		console.log("model:", model);
 
 		const result = streamText({
 			model: provider.chat(model),

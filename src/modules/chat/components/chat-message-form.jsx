@@ -27,15 +27,16 @@ const ChatMessageForm = ({ initialMessage, onMessageChange }) => {
 	}, [initialMessage, onMessageChange]);
 
 	const handleSubmit = async (e) => {
+		e.preventDefault();
+		if (!message.trim() || !effectiveModel || isChatPending) return;
+
 		try {
-			e.preventDefault();
 			await mutateAsync({ content: message, model: effectiveModel });
+			setMessage("");
 			toast.success("Message sent successfully");
 		} catch (error) {
 			console.error("Error sending message:", error);
 			toast.error("Failed to send message");
-		} finally {
-			setMessage("");
 		}
 	};
 
